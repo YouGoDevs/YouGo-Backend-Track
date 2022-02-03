@@ -26,10 +26,10 @@ The handy thing about having a swagger spec is that it will generate the client 
 > TIP: If you haven’t used Postman in the past, it’s an excellent resource for testing APIs.
 
 ### At the end of Part 0, you should deliver:
-Github repo for the project, containing:
-- [ ] The swagger Spec
-- [ ] The server-side generated API stubs
-- [ ] Your node.js logic that hooks into the stubs
-- [ ] README about the project
-- [ ] Another markdown file on the design decisions you’ve made so far, defending your choice with pros/cons (definitely answer all the questions I posed above, plus whatever else you had to decide) 
+- Github repo for the project, containing:
+  - [ ] The swagger Spec
+  - [ ] The server-side generated API stubs
+  - [ ] Your node.js logic that hooks into the stubs
+  - [ ] README about the project
+  - [ ] Another markdown file on the design decisions you’ve made so far, defending your choice with pros/cons (definitely answer all the questions I posed above, plus whatever else you had to decide) 
 - [ ] The hosted API
