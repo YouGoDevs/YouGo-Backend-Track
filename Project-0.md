@@ -32,4 +32,4 @@ The handy thing about having a swagger spec is that it will generate the client 
   - [ ] Your node.js logic that hooks into the stubs
   - [ ] README about the project
   - [ ] Another markdown file on the design decisions you’ve made so far, defending your choice with pros/cons (definitely answer all the questions I posed above, plus whatever else you had to decide) 
-- [ ] The hosted API
+- The hosted API
