@@ -6,14 +6,14 @@ Notes:
 - This requirements doc will also point you in the right direction of some design decisions to consider, but it won’t cover everything. Part of being a developer is working with ambiguity and making the best decision possible with the available information, making reasonable assumptions of how the service may grow in the future.
 - There will be brownie points for this (and any) project if you choose to do it in Golang instead of making me read Node.js 😅. But prioritizing getting the job done over learning something new is also a reasonable decision.
 
-## Part 0
+## Part 0: The Agreement
 For this part, the client wants to send an image to an HTTP(S) endpoint, specify some manipulation, and receive the manipulated image back as a response. The manipulations that need to be supported right now include:
 - Image resizing
 - Grayscale
 - Transformations (rotate, inversion).
 - At least two methods supported by the image processing library you choose. 
 
-Your first task will be to make your API specification for the service. This spec will be shared with the client. Technically, as long as the client knows how to interact with your service, any method you choose to convey that information will work. You could simply have the spec in a README, for example. But I want you to learn how industries do this so we’ll aim higher. You will document your service more officially, according to the OpenAPI specification version 3. This type of specification is known commonly as a “swagger spec”. I’ll allow you to do your research, read and become familiar with it ([OpenAPI Specification & Swagger Tools](https://swagger.io/resources/open-api/) is a great site to start). But it essentially allows you to specify all aspects of the service using YAML or JSON. [editor.swagger.io](https://editor.swagger.io/) is a great editor to compose your spec with real-time feedback and visualization. It starts you off with an excellent example spec (hint: one of the endpoints in the spec relates to image upload).  
+Your first task will be to make your API specification for the service. This spec will be shared with the client. Technically, as long as the client knows how to interact with your service, any method you choose to convey that information will work. You could easily have the spec in a README, for example. But I want you to learn how industries do this so we’ll aim higher. You will document your service more officially, according to the OpenAPI specification version 3. This type of specification is known commonly as a “swagger spec”. I’ll allow you to do your research, read and become familiar with it ([OpenAPI Specification & Swagger Tools](https://swagger.io/resources/open-api/) is a great site to start). But it essentially allows you to specify all aspects of the service using YAML or JSON. [editor.swagger.io](https://editor.swagger.io/) is a great editor to compose your spec with real-time feedback and visualization. It starts you off with an excellent example spec (hint: one of the endpoints in the spec relates to image upload).  
 The handy thing about having a swagger spec is that it will generate the client and server-side code compliant with the spec. Right now, we care about the server-side stubs, but in a future part, you’ll spin up a front-end to interact with the API.
 
 ### Some decisions you’ll need to make in this step:
@@ -33,3 +33,30 @@ The handy thing about having a swagger spec is that it will generate the client 
   - [ ] README about the project
   - [ ] Another markdown file on the design decisions you’ve made so far, defending your choice with pros/cons (definitely answer all the questions I posed above, plus whatever else you had to decide) 
 - The hosted API
+___
+
+## Part 1 The Horizontals
+So you've created the MVP (minimum viable product) for your API and shared it with some friends. However, they keep comparing it to what Google Photos can do - where you can do some filters, but it also allows users to store images and upload/download/manipulate them at will. You agree that image storage should be the next logical step for your API (Hopefully, you picked a service host provider that integrates nicely with a storage product with a generous free tier).
+
+You will create a few more endpoints/options for your API service for this task. Users should be able to 
+- Upload an image to be stored, 
+- Get a list of images stored (the image name/id, not the actual image), 
+- Download an image by name/id, 
+- Perform a supported manipulation on a stored image (specified by image name/id) and return the manipulated image. Brownie points if you allow the user to save an uploaded copy of the manipulated image.
+
+Of course, since you now have a user base, you'll also need a database and a way to authenticate users' requests. In this task, you'll also have a user sign-up endpoint. For now, you'll only support username+password authentication. Feel free to enforce whatever validations you'd like (i.e., all usernames must be unique, a minimum length for passwords, etc.). You can also have the sign-up API optionally collect useful personal information like name, DOB, location. Before storing the username and password in a DB, you should first salt and hash it. All APIs (including those from the previous task) will now be protected routes (requiring auth). Since we're making a REST API service, we won't have the idea of a user session. Instead, the user will pass authentication headers with each request. The header should be in a form where the key is `auth`, and the value is a base64 encoded `username;password`. 
+> Note: This is **not** a sufficient or advised approach for authenticating. This approach is structured explicitly as a teaching goal to give some experience with salting, hashing, encryption, and encoding. Later on, we will implement a better auth story.
+
+### Questions to consider:
+- Does your existing API design structure support this expansion in a smooth way that makes sense to a consumer of the API?
+- Would it be smoother to have one upload/download/delete endpoint and use the correct HTTP method to differentiate?
+- What hashing function/library should you use? Do efficiency considerations of the hashing algorithm change, given you'll have to perform encryption on a per request basis?
+- What database type meets your needs now and potentially in the future? How do you design/structure data you're hoping to store?
+- Does it make sense to collect some personal info from the client at this point? What data is necessary? What data is useful?
+- Do you need to limit the total available storage of a given user? 
+
+### At the end of part 1, you should deliver:
+- [ ] The new endpoints specified above enable users to upload, download, store, and manipulate images.
+- [ ] A user login endpoint
+- [ ] A database to hold details (plus schema, if necessary)
+- [ ] Storage solution to host images 
