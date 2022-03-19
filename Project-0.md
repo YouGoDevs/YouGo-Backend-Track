@@ -35,7 +35,7 @@ The handy thing about having a swagger spec is that it will generate the client 
 - The hosted API
 ___
 
-## Part 1 The Horizontals
+## Part 1: The Horizontals
 So you've created the MVP (minimum viable product) for your API and shared it with some friends. However, they keep comparing it to what Google Photos can do - where you can do some filters, but it also allows users to store images and upload/download/manipulate them at will. You agree that image storage should be the next logical step for your API (Hopefully, you picked a service host provider that integrates nicely with a storage product with a generous free tier).
 
 You will create a few more endpoints/options for your API service for this task. Users should be able to 
@@ -59,4 +59,19 @@ Of course, since you now have a user base, you'll also need a database and a way
 - [ ] The new endpoints specified above enable users to upload, download, store, and manipulate images.
 - [ ] A user login endpoint
 - [ ] A database to hold details (plus schema, if necessary)
-- [ ] Storage solution to host images 
+- [ ] Storage solution to host images
+
+## Part 2: The Makeover
+With part 1 complete, you want to share your product more widely. The problem is that most people don't want to call an API directly. Most have never heard of Postman. To get the opinions of a more general audience, in this step, you'll create a simple front-end client.  
+This project isn't front-end focused, so I expect a clean, minimal design. I don't particularly care what framework or front-end stack you use. The pages/screens expected:
+- [optional] Landing page
+- Login page
+- User's Home page displaying their uploaded images
+- Allow the user should click on an image thumbnail and display the full-size image.
+- Image edit page where the user can see the result of applying the various transformations implemented thus far and save a copy of the transformed image.
+
+To be clear, this should be a "dumb" client that simply calls your existing backend APIs, such as auth and image transformations. DO NOT re-implement functionality that already exists.
+
+### At the end of this part, you should deliver:
+- [ ] A hosted, front-end client
+- [ ] Updated README on how to interact with your app.
