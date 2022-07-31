@@ -75,3 +75,26 @@ To be clear, this should be a "dumb" client that simply calls your existing back
 ### At the end of this part, you should deliver:
 - [ ] A hosted, front-end client
 - [ ] Updated README on how to interact with your app.
+
+## Part 3: Get Meta with it
+I always think of metadata as "the data about the data," and it can be even more important than the data itself. In this project, we're collecting and manipulating some interesting data so let's take it a step further and play around with the different types of metadata we can access.
+
+Image metadata:  
+Many images are rich with metadata. These include 
+- The location where the photo was taken.
+- The time they took the photo.
+- The type of camera.
+
+Request metadata:  
+Each request from your user is rich with data. Most of the cool stuff is in the HTTP header of the request. You can find details such as: 
+- The `userAgent` gives info about the device/browser that made the request.
+- The IP address, which you can use a library/service to link to a location.
+
+In this part, whenever a user sends a request to upload an image, you'll see what metadata is available to you. Alongside returning whatever status message to indicate success, you should also return a funny/creepy message which utilizes some metadata. For example, if the location tells you that the photo was taken in The Bahamas, you could send a message, "I hope you had a great time in The Bahamas!" Or, if the photo tells you that it was taken with an iPhone, you could say, "Android cameras take waay better photos!" Or, if the IP address for the request says they're in Chicago, you could say, "It's hot in Chicago today!"  
+You get the idea. Go wild.
+
+### At the end of this part, you should deliver:
+- [ ] A modified upload API that returns a message based on metadata you mined.
+- [ ] Since you have a UI, display the message in a toast (or something similar).
+- [ ] Integration with an  IP -> location service.
+- [ ] Whatever API integrations you think would make this feature more robust. For example, integrate with a weather API to return accurate weather for their IP address location.
